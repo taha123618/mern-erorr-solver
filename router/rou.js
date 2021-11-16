@@ -8,12 +8,8 @@ const authenticate = require('../middleware/authenticate');
 require('../db/conn');
 
 const User = require('../model/userSchema');
-const { default: Contact } = require('../../client/src/compontents/Contact');
-const { validate } = require('../model/userSchema');
-
-router.get('/', (req, res) => {
-    res.send("Hello world Router.js")
-});
+// const { default: Contact } = require('../../client/src/compontents/Contact');
+// const { validate } = require('../model/userSchema');
 
 
 // REGISTRATION
