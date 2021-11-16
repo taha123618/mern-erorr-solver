@@ -4,7 +4,7 @@ const app = express();
 
 
 // For Sercurity of password of databse 
-dotenv.config({path: './config.env'});
+dotenv.config({ path: './config.env' });
 
 
 
@@ -16,7 +16,7 @@ app.use(require('./router/rou'));
 
 
 // port 
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 5000;
 
 
 
@@ -27,19 +27,29 @@ const PORT = process.env.PORT;
 // }
 // middleware();
 
-app.get('/' , (req, res) =>{
+app.get('/', (req, res) => {
     res.send("Hello world taha ahmed")
 });
 // app.get('/about' , middleware, (req, res) =>{
 //     res.send("Hello world about")
 // });
-app.get('/contact' , (req, res) =>{
-    res.send("Hello world contact")
-});
-app.get('/signin' , (req, res) =>{
+// app.get('/contact' , (req, res) =>{
+//     res.send("Hello world contact")
+// });
+app.get('/signin', (req, res) => {
     res.send("Hello world signin")
 });
 
-app.listen(PORT , ()=>{
-    console.log(`Listinng on ${PORT} ...` );
+// 3 step of Heroku
+if (process.env.NODE_ENV == "production"){
+    app.use(express.static("client/build"));
+    const path = require("path");
+    app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+    })
+    }
+    
+
+app.listen(PORT, () => {
+    console.log(`Listinng on ${PORT} ...`);
 })
